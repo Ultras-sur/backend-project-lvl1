@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Ultras-sur/backend-project-lvl1#readme",
   "dependencies": {
-    "nodejs": "0.0.0"
+    "nodejs": "0.0.0",
+    "readline-sync": "file:readline-sync"
   }
 }
