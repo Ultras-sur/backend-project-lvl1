@@ -22,7 +22,7 @@
   "homepage": "https://github.com/Ultras-sur/backend-project-lvl1#readme",
   "dependencies": {
     "nodejs": "0.0.0",
-    "readline-sync": "0.0.0"
+    "readline-sync": "1.4.10"
   },
   "devDependencies": {
     "eslint": "^7.17.0",
