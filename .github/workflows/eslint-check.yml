@@ -1,0 +1,35 @@
+#Name of workflow
+name: Eslint-tcheck
+
+on: push
+
+jobs:
+  
+  build:
+    
+    runs-on: ubuntu-latest
+
+    strategy:
+
+      matrix:
+        node-version: [14.x]
+
+    steps:
+
+      - uses: action/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: action/setup-node@v1
+        whith: 
+          node-version: {{ matrix.node-version }}
+
+      - name: npm install
+        run: | 
+          make install
+        env: 
+          CI: true
+      - name: Run Linter
+        run: |
+          make lint    
+
+
