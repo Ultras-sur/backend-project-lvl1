@@ -1,5 +1,5 @@
 #Name of workflow
-name: Eslint-tcheck
+name: Eslint
 
 on: push
 
