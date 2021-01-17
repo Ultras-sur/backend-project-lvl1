@@ -36,7 +36,7 @@ function gcDivisor(num1, num2) {
   }
   return result;
 }
-
+// Получение результата к игре brain-calc
 function checkOperator(num1, num2, operator) {
   if (operator === '+') {
     return num1 + num2;
@@ -126,8 +126,8 @@ export const brainGcd = () => {
   const name = getNameGlobal();
   console.log(`Hello, ${name}!\nFind the greatest common divisor of given numbers.`);
   for (let i = 0; i !== 3;) {
-    const num1 = mathRandom(50);
-    const num2 = mathRandom(50);
+    const num1 = mathRandom(1, 50);
+    const num2 = mathRandom(1, 50);
     const question = `${num1} ${num2}`;
     console.log(`Question: ${question}`);
     const userAnswer = readlineSync.question('Your answer: ');
