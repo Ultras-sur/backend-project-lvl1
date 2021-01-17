@@ -47,15 +47,17 @@ const checkbrainEven = (getNum, userAnswer, name) => {
   } if (getNum % 2 === 0 && userAnswer.toLowerCase() === 'no') {
     console.log(`'${userAnswer}' is wrong ;(. Correct answer is 'yes'.\nLet's try again, ${name}!`);
   }
+  return false;
 };
 // Проверка ответа пользователя к игре Brain-Calc
 const checkBrainCalc = (question, userAnswer, name) => {
-  const answer = eval(question);
+  const answer = new Function(`return ${question}`)();
   if (answer === Number(userAnswer)) {
     console.log('Correct!');
     return true;
   }
   console.log(`'${userAnswer}' is wrong ;(. Correct answer is ${answer}.\nLet's try again, ${name}!`);
+  return false;
 };
 // Проверка ответа пользователя к игре Brain-Gcd
 function checkGcd(num1, num2, userAnswer, name) {
@@ -65,6 +67,7 @@ function checkGcd(num1, num2, userAnswer, name) {
     return true;
   }
   console.log(`'${userAnswer}' is wrong ;(. Correct answer is ${answer}.\nLet's try again, ${name}!`);
+  return false;
 }
 // Проверка ответа пользователя к игре Brain-progression
 function checkProgression(answer, userAnswer, name) {
@@ -73,6 +76,7 @@ function checkProgression(answer, userAnswer, name) {
     return true;
   }
   console.log(`'${userAnswer}' is wrong ;(. Correct answer is ${answer}.\nLet's try again, ${name}!`);
+  return false;
 }
 // Начало работы игра Brain-Even
 export const brainEven = () => {
@@ -80,7 +84,7 @@ export const brainEven = () => {
   console.log(`Hello, ${name}!\nAnswer "yes" if the number is even, otherwise unswer "no".`);
 
   for (let i = 0; i !== 3;) {
-    const getNum = mathRandom(100);
+    const getNum = mathRandom(0, 100);
     console.log(`Question: ${getNum}`);
     const userAnswer = readlineSync.question('Your answer: ');
     if (checkbrainEven(getNum, userAnswer, name)) {
@@ -94,7 +98,10 @@ export const brainCalc = () => {
   const name = getNameGlobal();
   console.log(`Hello, ${name}!\nWhat is the result of the expression?`);
   for (let i = 0; i !== 3;) {
-    const question = `${mathRandom(20)} ${getOperator()} ${mathRandom(20)}`;
+    const num1 = mathRandom(0, 20);
+    const num2 = mathRandom(0, 20);
+
+    const question = `${num1} ${getOperator()} ${num2}`;
     console.log(`Question: ${question}`);
     const userAnswer = readlineSync.question('Your answer: ');
     if (checkBrainCalc(question, userAnswer, name)) {
