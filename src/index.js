@@ -1,19 +1,31 @@
 import readlineSync from 'readline-sync';
 
+// Получение случайного числа от min до max
+function mathRandom(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+// Получение арифметической прогрессии
+const randomProgression = () => {
+  const randFirstNum = mathRandom(1, 50);
+  const arrLength = mathRandom(5, 10);
+  const randomNum = mathRandom(1, 10);
+  const result = [randFirstNum];
+  for (let i = 0; i !== arrLength; i += 1) {
+    result.push(result[i] + randomNum);
+  }
+  return result;
+};
 // Получение случайного элемента массива
 function randomArrayElement(arr) {
   const rand = Math.floor(Math.random() * arr.length);
   return arr[rand];
 }
-// Получение опретора вычисления
+// Получение случайного оператора вычисления
 const getOperator = () => randomArrayElement(['*', '+', '-']);
 
 // Получение имени пользователя
 const getNameGlobal = () => readlineSync.question('May I have your name? ');
-// Получение случайного числа до max
-function mathRandom(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
+
 // Получение наибольшего общего делителя
 function gcDivisor(num1, num2) {
   let result = 1;
@@ -49,6 +61,14 @@ const checkBrainCalc = (question, userAnswer, name) => {
 function checkGcd(num1, num2, userAnswer, name) {
   const answer = gcDivisor(num1, num2);
   if (Number(userAnswer) === answer) {
+    console.log('Correct!');
+    return true;
+  }
+  console.log(`'${userAnswer}' is wrong ;(. Correct answer is ${answer}.\nLet's try again, ${name}!`);
+}
+// Проверка ответа пользователя к игре Brain-progression
+function checkProgression(answer, userAnswer, name) {
+  if (answer === Number(userAnswer)) {
     console.log('Correct!');
     return true;
   }
@@ -94,6 +114,23 @@ export const brainGcd = () => {
     console.log(`Question: ${question}`);
     const userAnswer = readlineSync.question('Your answer: ');
     if (checkGcd(num1, num2, userAnswer, name)) {
+      i += 1;
+    }
+  }
+  console.log(`Congratulations, ${name}!`);
+};
+// Начало работы игра brain-progression
+export const brainProgression = () => {
+  const name = getNameGlobal();
+  console.log(`Hello, ${name}!\nWhat number is missing in the progression?`);
+  for (let i = 0; i !== 3;) {
+    const question = randomProgression();
+    const indexOfElement = mathRandom(0, question.length - 1);
+    const answer = question[indexOfElement];
+    question[indexOfElement] = '..';
+    console.log(`Question: ${question.join(' ')}`);
+    const userAnswer = readlineSync.question('Your answer: ');
+    if (checkProgression(answer, userAnswer, name)) {
       i += 1;
     }
   }
