@@ -36,6 +36,17 @@ function gcDivisor(num1, num2) {
   }
   return result;
 }
+
+function checkOperator(num1, num2, operator) {
+  if (operator === '+') {
+    return num1 + num2;
+  } if (operator === '-') {
+    return num1 - num2;
+  } if (operator === '*') {
+    return num1 * num2;
+  }
+  return undefined;
+}
 // Проверка ответа пользователя к игре Brain-Even
 const checkbrainEven = (getNum, userAnswer, name) => {
   if ((getNum % 2 === 0 && userAnswer.toLowerCase() === 'yes')
@@ -50,8 +61,8 @@ const checkbrainEven = (getNum, userAnswer, name) => {
   return false;
 };
 // Проверка ответа пользователя к игре Brain-Calc
-const checkBrainCalc = (question, userAnswer, name) => {
-  const answer = new Function(`return ${question}`)();
+const checkBrainCalc = (num1, num2, operator, userAnswer, name) => {
+  const answer = checkOperator(num1, num2, operator);
   if (answer === Number(userAnswer)) {
     console.log('Correct!');
     return true;
@@ -100,11 +111,11 @@ export const brainCalc = () => {
   for (let i = 0; i !== 3;) {
     const num1 = mathRandom(0, 20);
     const num2 = mathRandom(0, 20);
-
-    const question = `${num1} ${getOperator()} ${num2}`;
+    const operator = getOperator();
+    const question = `${num1} ${operator} ${num2}`;
     console.log(`Question: ${question}`);
     const userAnswer = readlineSync.question('Your answer: ');
-    if (checkBrainCalc(question, userAnswer, name)) {
+    if (checkBrainCalc(num1, num2, operator, userAnswer, name)) {
       i += 1;
     }
   }
