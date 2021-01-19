@@ -47,7 +47,16 @@ function checkOperator(num1, num2, operator) {
   }
   return undefined;
 }
-// Проверка ответа пользователя к игре Brain-Even
+// Проверка на простое число
+function checkPrime(num) {
+  for (let i = 2; i !== num + 1; i += 1) {
+    if (num % i === 0 && i !== num) {
+      return 'no';
+    }
+  }
+  return 'yes';
+}
+// Проверка ответа пользователя к игре brain-Even
 const checkbrainEven = (getNum, userAnswer, name) => {
   if ((getNum % 2 === 0 && userAnswer.toLowerCase() === 'yes')
         || (getNum % 2 !== 0 && userAnswer.toLowerCase() === 'no')) {
@@ -60,7 +69,7 @@ const checkbrainEven = (getNum, userAnswer, name) => {
   }
   return false;
 };
-// Проверка ответа пользователя к игре Brain-Calc
+// Проверка ответа пользователя к игре brain-Calc
 const checkBrainCalc = (num1, num2, operator, userAnswer, name) => {
   const answer = checkOperator(num1, num2, operator);
   if (answer === Number(userAnswer)) {
@@ -70,7 +79,7 @@ const checkBrainCalc = (num1, num2, operator, userAnswer, name) => {
   console.log(`'${userAnswer}' is wrong ;(. Correct answer is ${answer}.\nLet's try again, ${name}!`);
   return false;
 };
-// Проверка ответа пользователя к игре Brain-Gcd
+// Проверка ответа пользователя к игре brain-Gcd
 function checkGcd(num1, num2, userAnswer, name) {
   const answer = gcDivisor(num1, num2);
   if (Number(userAnswer) === answer) {
@@ -80,7 +89,7 @@ function checkGcd(num1, num2, userAnswer, name) {
   console.log(`'${userAnswer}' is wrong ;(. Correct answer is ${answer}.\nLet's try again, ${name}!`);
   return false;
 }
-// Проверка ответа пользователя к игре Brain-progression
+// Проверка ответа пользователя к игре brain-progression
 function checkProgression(answer, userAnswer, name) {
   if (answer === Number(userAnswer)) {
     console.log('Correct!');
@@ -89,7 +98,22 @@ function checkProgression(answer, userAnswer, name) {
   console.log(`'${userAnswer}' is wrong ;(. Correct answer is ${answer}.\nLet's try again, ${name}!`);
   return false;
 }
-// Начало работы игра Brain-Even
+// Проверка ответа пользователя к игре brain-prime
+function checkBrainPrime(question, userAnswer, name) {
+  const userAnswerLow = userAnswer.toLowerCase();
+  const answer = checkPrime(question);
+  if (answer === userAnswerLow) {
+    console.log('Correct!');
+    return true;
+  } if (answer !== userAnswerLow && userAnswerLow === 'yes') {
+    console.log(`'${userAnswer}' is wrong ;(. Correct answer is 'no'.\nLet's try again, ${name}!`);
+    return false;
+  } if (answer !== userAnswerLow && userAnswerLow === 'no') {
+    console.log(`'${userAnswer}' is wrong ;(. Correct answer is 'yes'.\nLet's try again, ${name}!`);
+  }
+  return false;
+}
+// Начало работы игра brain-Even
 export const brainEven = () => {
   const name = getNameGlobal();
   console.log(`Hello, ${name}!\nAnswer "yes" if the number is even, otherwise unswer "no".`);
@@ -104,7 +128,7 @@ export const brainEven = () => {
   }
   console.log(`Congratulations, ${name}!`);
 };
-// Начало работы игра Brain-Calc
+// Начало работы игра brain-Calc
 export const brainCalc = () => {
   const name = getNameGlobal();
   console.log(`Hello, ${name}!\nWhat is the result of the expression?`);
@@ -149,6 +173,20 @@ export const brainProgression = () => {
     console.log(`Question: ${question.join(' ')}`);
     const userAnswer = readlineSync.question('Your answer: ');
     if (checkProgression(answer, userAnswer, name)) {
+      i += 1;
+    }
+  }
+  console.log(`Congratulations, ${name}!`);
+};
+// Начало работы игра brain-prime
+export const brainPrime = () => {
+  const name = getNameGlobal();
+  console.log(`Hello, ${name}!\nAnswer "yes" if given number is prime. Otherwise answer "no".`);
+  for (let i = 0; i !== 3;) {
+    const question = mathRandom(2, 3572);
+    console.log(`Question: ${question}`);
+    const userAnswer = readlineSync.question('Your answer: ');
+    if (checkBrainPrime(question, userAnswer, name)) {
       i += 1;
     }
   }
