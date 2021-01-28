@@ -4,7 +4,7 @@
   "description": "[![Actions Status](https://github.com/Ultras-sur/backend-project-lvl1/workflows/hexlet-check/badge.svg)](https://github.com/Ultras-sur/backend-project-lvl1/actions)",
   "main": "brain-games.js",
   "type": "module",
-  "bin": {
+  "bin/games": {
     "brain-games": "bin/brain-games.js",
     "brain-even": "bin/brain-even.js",
     "brain-calc": "bin/brain-calc.js",

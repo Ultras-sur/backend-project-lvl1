@@ -1,11 +1,11 @@
 import readlineSync from 'readline-sync';
 
 // Получение случайного числа от min до max
-function mathRandom(min, max) {
+export function mathRandom(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 // Получение арифметической прогрессии
-const randomProgression = () => {
+export const randomProgression = () => {
   const randFirstNum = mathRandom(1, 50);
   const arrLength = mathRandom(5, 10);
   const randomNum = mathRandom(1, 10);
@@ -21,10 +21,10 @@ function randomArrayElement(arr) {
   return arr[rand];
 }
 // Получение случайного оператора вычисления
-const getOperator = () => randomArrayElement(['*', '+', '-']);
+export const getOperator = () => randomArrayElement(['*', '+', '-']);
 
 // Получение имени пользователя
-const getNameGlobal = () => readlineSync.question('May I have your name? ');
+export const getNameGlobal = () => readlineSync.question('May I have your name? ');
 
 // Получение наибольшего общего делителя
 function gcDivisor(num1, num2) {
@@ -57,20 +57,21 @@ function checkPrime(num) {
   return 'yes';
 }
 // Проверка ответа пользователя к игре brain-Even
-const checkbrainEven = (getNum, userAnswer, name) => {
+export const checkbrainEven = (getNum, userAnswer, name) => {
   if ((getNum % 2 === 0 && userAnswer.toLowerCase() === 'yes')
         || (getNum % 2 !== 0 && userAnswer.toLowerCase() === 'no')) {
     console.log('Correct!');
     return true;
   } if (getNum % 2 !== 0 && userAnswer.toLowerCase() === 'yes') {
     console.log(`'${userAnswer}' is wrong ;(. Correct answer is 'no'.\nLet's try again, ${name}!`);
-  } if (getNum % 2 === 0 && userAnswer.toLowerCase() === 'no') {
+    return false;
+  } if (getNum % 2 !== 0 && userAnswer.toLowerCase() === 'no') {
     console.log(`'${userAnswer}' is wrong ;(. Correct answer is 'yes'.\nLet's try again, ${name}!`);
   }
   return false;
 };
 // Проверка ответа пользователя к игре brain-Calc
-const checkBrainCalc = (num1, num2, operator, userAnswer, name) => {
+export const checkBrainCalc = (num1, num2, operator, userAnswer, name) => {
   const answer = checkOperator(num1, num2, operator);
   if (answer === Number(userAnswer)) {
     console.log('Correct!');
@@ -80,7 +81,7 @@ const checkBrainCalc = (num1, num2, operator, userAnswer, name) => {
   return false;
 };
 // Проверка ответа пользователя к игре brain-Gcd
-function checkGcd(num1, num2, userAnswer, name) {
+export function checkGcd(num1, num2, userAnswer, name) {
   const answer = gcDivisor(num1, num2);
   if (Number(userAnswer) === answer) {
     console.log('Correct!');
@@ -90,7 +91,7 @@ function checkGcd(num1, num2, userAnswer, name) {
   return false;
 }
 // Проверка ответа пользователя к игре brain-progression
-function checkProgression(answer, userAnswer, name) {
+export function checkProgression(answer, userAnswer, name) {
   if (answer === Number(userAnswer)) {
     console.log('Correct!');
     return true;
@@ -99,7 +100,7 @@ function checkProgression(answer, userAnswer, name) {
   return false;
 }
 // Проверка ответа пользователя к игре brain-prime
-function checkBrainPrime(question, userAnswer, name) {
+export function checkBrainPrime(question, userAnswer, name) {
   const userAnswerLow = userAnswer.toLowerCase();
   const answer = checkPrime(question);
   if (answer === userAnswerLow) {
@@ -123,23 +124,6 @@ export const brainEven = () => {
     console.log(`Question: ${getNum}`);
     const userAnswer = readlineSync.question('Your answer: ');
     if (checkbrainEven(getNum, userAnswer, name)) {
-      i += 1;
-    }
-  }
-  console.log(`Congratulations, ${name}!`);
-};
-// Начало работы игра brain-Calc
-export const brainCalc = () => {
-  const name = getNameGlobal();
-  console.log(`Hello, ${name}!\nWhat is the result of the expression?`);
-  for (let i = 0; i !== 3;) {
-    const num1 = mathRandom(0, 20);
-    const num2 = mathRandom(0, 20);
-    const operator = getOperator();
-    const question = `${num1} ${operator} ${num2}`;
-    console.log(`Question: ${question}`);
-    const userAnswer = readlineSync.question('Your answer: ');
-    if (checkBrainCalc(num1, num2, operator, userAnswer, name)) {
       i += 1;
     }
   }
