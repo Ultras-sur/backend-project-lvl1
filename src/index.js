@@ -56,18 +56,19 @@ function checkPrime(num) {
   }
   return 'yes';
 }
+// Проверка числа на четность
+function checkEven(num) {
+  return num % 2 === 0 ? 'yes' : 'no';
+}
+
 // Проверка ответа пользователя к игре brain-Even
 export const checkbrainEven = (getNum, userAnswer, name) => {
-  if ((getNum % 2 === 0 && userAnswer.toLowerCase() === 'yes')
-        || (getNum % 2 !== 0 && userAnswer.toLowerCase() === 'no')) {
+  const answer = checkEven(getNum);
+  if (answer === userAnswer.toLowerCase()) {
     console.log('Correct!');
     return true;
-  } if (getNum % 2 !== 0 && userAnswer.toLowerCase() === 'yes') {
-    console.log(`'${userAnswer}' is wrong ;(. Correct answer is 'no'.\nLet's try again, ${name}!`);
-    return false;
-  } if (getNum % 2 !== 0 && userAnswer.toLowerCase() === 'no') {
-    console.log(`'${userAnswer}' is wrong ;(. Correct answer is 'yes'.\nLet's try again, ${name}!`);
   }
+  console.log(`'${userAnswer}' is wrong ;(. Correct answer is '${answer}'.\nLet's try again, ${name}!`);
   return false;
 };
 // Проверка ответа пользователя к игре brain-Calc
@@ -106,12 +107,8 @@ export function checkBrainPrime(question, userAnswer, name) {
   if (answer === userAnswerLow) {
     console.log('Correct!');
     return true;
-  } if (answer !== userAnswerLow && userAnswerLow === 'yes') {
-    console.log(`'${userAnswer}' is wrong ;(. Correct answer is 'no'.\nLet's try again, ${name}!`);
-    return false;
-  } if (answer !== userAnswerLow && userAnswerLow === 'no') {
-    console.log(`'${userAnswer}' is wrong ;(. Correct answer is 'yes'.\nLet's try again, ${name}!`);
   }
+  console.log(`'${userAnswer}' is wrong ;(. Correct answer is '${answer}'.\nLet's try again, ${name}!`);
   return false;
 }
 // Начало работы игра brain-Even
@@ -149,7 +146,7 @@ export const brainGcd = () => {
 export const brainProgression = () => {
   const name = getNameGlobal();
   console.log(`Hello, ${name}!\nWhat number is missing in the progression?`);
-  for (let i = 0; i !== 3;) {
+  for (let i = 0; i < 3;) {
     const question = randomProgression();
     const indexOfElement = mathRandom(0, question.length - 1);
     const answer = question[indexOfElement];
@@ -158,9 +155,13 @@ export const brainProgression = () => {
     const userAnswer = readlineSync.question('Your answer: ');
     if (checkProgression(answer, userAnswer, name)) {
       i += 1;
+    } else {
+      i += 4;
+    }
+    if (i === 3) {
+      console.log(`Congratulations, ${name}!`);
     }
   }
-  console.log(`Congratulations, ${name}!`);
 };
 // Начало работы игра brain-prime
 export const brainPrime = () => {
