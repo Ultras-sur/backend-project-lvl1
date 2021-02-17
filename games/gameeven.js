@@ -9,7 +9,11 @@ const brainEven = () => {
     const getNum = mathRandom(0, 100);
     console.log(`Question: ${getNum}`);
     const userAnswer = readlineSync.question('Your answer: ');
-    checkbrainEven(getNum, userAnswer, name) ? i += 1 : i += 4;
+    if (checkbrainEven(getNum, userAnswer, name)) {
+      i += 1;
+    } else {
+      i += 4;
+    }
     if (i === 3) {
       console.log(`Congratulations, ${name}!`);
     }

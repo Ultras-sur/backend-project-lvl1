@@ -8,7 +8,11 @@ const brainPrime = () => {
     const question = mathRandom(2, 3572);
     console.log(`Question: ${question}`);
     const userAnswer = readlineSync.question('Your answer: ');
-    checkBrainPrime(question, userAnswer, name) ? i += 1 : i += 4;
+    if (checkBrainPrime(question, userAnswer, name)) {
+      i += 1;
+    } else {
+      i += 4;
+    }
     if (i === 3) {
       console.log(`Congratulations, ${name}!`);
     }

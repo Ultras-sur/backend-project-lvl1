@@ -10,7 +10,11 @@ const brainGcd = () => {
     const question = `${num1} ${num2}`;
     console.log(`Question: ${question}`);
     const userAnswer = readlineSync.question('Your answer: ');
-    checkGcd(num1, num2, userAnswer, name) ? i += 1 : i += 4;
+    if (checkGcd(num1, num2, userAnswer, name)) {
+      i += 1;
+    } else {
+      i += 4;
+    }
     if (i === 3) {
       console.log(`Congratulations, ${name}!`);
     }

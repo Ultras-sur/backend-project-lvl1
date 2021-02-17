@@ -13,7 +13,11 @@ const brainCalc = () => {
     const question = `${num1} ${operator} ${num2}`;
     console.log(`Question: ${question}`);
     const userAnswer = readlineSync.question('Your answer: ');
-    checkBrainCalc(num1, num2, operator, userAnswer, name) ? i += 1 : i += 4;
+    if (checkBrainCalc(num1, num2, operator, userAnswer, name)) {
+      i += 1;
+    } else {
+      i += 4;
+    }
     if (i === 3) {
       console.log(`Congratulations, ${name}!`);
     }

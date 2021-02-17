@@ -13,7 +13,11 @@ const brainProgression = () => {
     question[indexOfElement] = '..';
     console.log(`Question: ${question.join(' ')}`);
     const userAnswer = readlineSync.question('Your answer: ');
-    checkProgression(answer, userAnswer, name) ? i += 1 : i += 4;
+    if (checkProgression(answer, userAnswer, name)) {
+      i += 1;
+    } else {
+      i += 4;
+    }
     if (i === 3) {
       console.log(`Congratulations, ${name}!`);
     }
